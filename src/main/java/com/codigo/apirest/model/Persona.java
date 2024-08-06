@@ -6,6 +6,16 @@ public class Persona {
     private String email;
     private int edad;
 
+    public Persona(String nombre, String apellidos, String email, int edad) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.edad = edad;
+    }
+
+    public Persona() {
+    }
+
     public String getNombre() {
         return nombre;
     }
