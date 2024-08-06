@@ -2,6 +2,8 @@ package com.codigo.apirest.controller;
 
 import com.codigo.apirest.aggregates.request.PersonaRequest;
 import com.codigo.apirest.aggregates.response.PersonaResponse;
+import com.codigo.apirest.model.Persona;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +14,11 @@ import org.springframework.web.bind.annotation.*;
 public class ApiController {
 
     /*Inyecciones de Beans*/
+    @Value("${apirest.variable.email}")
+    private String email;
 
+    @Value("${apirest.variable.edad}")
+    private int edad;
     /*EndPoint*/
     @GetMapping("/saludoNormal")
     public ResponseEntity<String> getSaludo(){
@@ -35,4 +41,15 @@ public class ApiController {
         personaResponse.setApellidos(personaRequest.getApellidos());
         return ResponseEntity.status(HttpStatus.CREATED).body(personaResponse);
     }
+
+    @GetMapping("/inyecprop")
+    public ResponseEntity<Persona> getInyectProp(){
+        Persona persona = new Persona();
+        persona.setNombre("Paul");
+        persona.setApellidos("Rodriguez");
+        persona.setEmail(email);
+        persona.setEdad(edad);
+        return ResponseEntity.ok(persona);
+    }
+
 }
